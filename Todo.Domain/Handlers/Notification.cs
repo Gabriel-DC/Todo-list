@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentValidation.Results;
@@ -12,37 +12,39 @@ namespace Todo.Domain.Handlers
     {
         public Notification()
         {
-            Notifications = new ValidationResult();
-            Notifications.Errors.Clear();
+            _notifications = new ValidationResult();
+            _notifications.Errors.Clear();
         }
 
-        public ValidationResult Notifications { get; set; }
+        private ValidationResult _notifications { get; set; }
 
-        public bool HasNotifications => Notifications?.Errors?.Count > 0;
+        public ReadOnlyCollection<ValidationFailure> Notifications => _notifications.Errors.AsReadOnly();
+
+        public bool HasNotifications => _notifications?.Errors?.Count > 0;
 
         public void AddNotification(string propertyName, string message)
         {
-            Notifications.Errors.Add(new ValidationFailure(propertyName, message));
+            _notifications.Errors.Add(new ValidationFailure(propertyName, message));
         }
 
         public void AddNotification(string message)
         {
-            Notifications.Errors.Add(new ValidationFailure(string.Empty, message));
+            _notifications.Errors.Add(new ValidationFailure(string.Empty, message));
         }
 
         public void AddNotifications(IEnumerable<ValidationFailure> notifications)
         {
-            Notifications.Errors.AddRange(notifications);
+            _notifications.Errors.AddRange(notifications);
         }
 
         public void AddNotifications(List<string> messages)
         {
-            Notifications.Errors.AddRange(messages.Select(m => new ValidationFailure(string.Empty, m)));
+            _notifications.Errors.AddRange(messages.Select(m => new ValidationFailure(string.Empty, m)));
         }
 
         public void AddNotifications(ValidationResult validationResult)
         {
-            Notifications.Errors.AddRange(validationResult.Errors);
+            _notifications.Errors.AddRange(validationResult.Errors);
         }
     }
 }

@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentValidation.Results;
@@ -9,7 +9,7 @@ namespace Todo.Domain.Handlers.Contracts
 {
     public interface INotification
     {
-        public ValidationResult Notifications { get; set; }
+        public ReadOnlyCollection<ValidationFailure> Notifications { get; }
         void AddNotification(string propertyName, string message);
         void AddNotification(string message);
         void AddNotifications(IEnumerable<ValidationFailure> notifications);

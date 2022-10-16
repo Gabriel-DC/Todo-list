@@ -29,7 +29,7 @@ namespace Todo.Domain.Handlers
             _notificationContext.AddNotifications(command.Validate());
 
             if (_notificationContext.HasNotifications)
-                return new GenericCommandResponse(false, "Erros de validação", _notificationContext.Notifications.Errors);
+                return new GenericCommandResponse(false, "Erros de validação", _notificationContext.Notifications);
 
             var todo = new TodoItem(command.Title, command.Date, command.User);
 
@@ -42,10 +42,10 @@ namespace Todo.Domain.Handlers
         {
             throw new NotImplementedException("Sossega ae");
 
-            _notificationContext.AddNotifications(command.Validate());
+            //_notificationContext.AddNotifications(command.Validate());
 
-            if (_notificationContext.HasNotifications)
-                return new GenericCommandResponse(false, "Erros de validação", _notificationContext.Notifications.Errors);
+            // if (_notificationContext.HasNotifications)
+            //     return new GenericCommandResponse(false, "Erros de validação", _notificationContext.Notifications.Errors);
 
             //var todo = _repository//GetById(command.id);
         }
