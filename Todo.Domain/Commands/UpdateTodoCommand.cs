@@ -28,6 +28,10 @@ namespace Todo.Domain.Commands
         {
             public UpdateTodoCommandValidator()
             {
+                RuleFor(r => r.TodoId)
+                    .NotEmpty()
+                    .WithMessage("Id inválido");
+
                 RuleFor(r => r.Title)
                     .MinimumLength(3)
                     .WithMessage("O título deve conter pelo menos 3 caracteres")
