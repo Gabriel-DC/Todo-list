@@ -40,14 +40,18 @@ namespace Todo.Domain.Handlers
 
         public ICommandResponse Handle(UpdateTodoCommand command)
         {
-            throw new NotImplementedException("Sossega ae");
+            throw new NotImplementedException("Calma ae");
 
-            //_notificationContext.AddNotifications(command.Validate());
+            // _notificationContext.AddNotifications(command.Validate());
 
             // if (_notificationContext.HasNotifications)
-            //     return new GenericCommandResponse(false, "Erros de validação", _notificationContext.Notifications.Errors);
+            //     return new GenericCommandResponse(false, "Erros de validação", _notificationContext.Notifications);
 
-            //var todo = _repository//GetById(command.id);
+            // var todo = _repository.GetTodoById(command.TodoId);
+
+            // _repository.Update(todo);
+
+            // return default!;
         }
     }
 }
