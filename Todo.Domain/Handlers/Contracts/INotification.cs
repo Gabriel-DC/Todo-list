@@ -9,7 +9,7 @@ namespace Todo.Domain.Handlers.Contracts
 {
     public interface INotification
     {
-        public ReadOnlyCollection<ValidationFailure> Notifications { get; }
+        public ReadOnlyCollection<Notification> Notifications { get; }
         void AddNotification(string propertyName, string message);
         void AddNotification(string message);
         void AddNotifications(IEnumerable<ValidationFailure> notifications);

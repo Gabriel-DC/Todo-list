@@ -13,7 +13,9 @@ namespace Todo.Domain.Handlers
 {
     public class TodoHandler :
     IHandler<CreateTodoCommand, ICommandResponse>,
-    IHandler<UpdateTodoCommand, ICommandResponse>
+    IHandler<UpdateTodoCommand, ICommandResponse>,
+    IHandler<MarkTodoAsDoneCommand, ICommandResponse>,
+    IHandler<MarkTodoAsUndoneCommand, ICommandResponse>
     {
         private readonly ITodoRepository _repository;
         private readonly INotification _notificationContext;
@@ -40,18 +42,50 @@ namespace Todo.Domain.Handlers
 
         public ICommandResponse Handle(UpdateTodoCommand command)
         {
-            throw new NotImplementedException("Calma ae");
+            _notificationContext.AddNotifications(command.Validate());
 
-            // _notificationContext.AddNotifications(command.Validate());
+            if (_notificationContext.HasNotifications)
+                return new GenericCommandResponse(false, "Erros de validação", _notificationContext.Notifications);
 
-            // if (_notificationContext.HasNotifications)
-            //     return new GenericCommandResponse(false, "Erros de validação", _notificationContext.Notifications);
+            var todo = _repository.GetTodoById(command.TodoId);
 
-            // var todo = _repository.GetTodoById(command.TodoId);
+            todo.UpdateTitle(command.Title);
 
-            // _repository.Update(todo);
+            _repository.Update(todo);
 
-            // return default!;
+            return new GenericCommandResponse(true, "Tarefa Atualizada!", todo);
+        }
+
+        public ICommandResponse Handle(MarkTodoAsUndoneCommand command)
+        {
+            _notificationContext.AddNotifications(command.Validate());
+
+            if (_notificationContext.HasNotifications)
+                return new GenericCommandResponse(false, "Erros de validação", _notificationContext.Notifications);
+
+            var todo = _repository.GetTodoById(command.TodoId);
+
+            todo.MarkAsUndone();
+
+            _repository.Update(todo);
+
+            return new GenericCommandResponse(true, "Tarefa atualizada", todo);
+        }
+
+        public ICommandResponse Handle(MarkTodoAsDoneCommand command)
+        {
+            _notificationContext.AddNotifications(command.Validate());
+
+            if (_notificationContext.HasNotifications)
+                return new GenericCommandResponse(false, "Erros de validação", _notificationContext.Notifications);
+
+            var todo = _repository.GetTodoById(command.TodoId);
+
+            todo.MarkAsDone();
+
+            _repository.Update(todo);
+
+            return new GenericCommandResponse(true, "Tarefa atualizada", todo);
         }
     }
 }
