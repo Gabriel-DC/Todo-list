@@ -1,8 +1,24 @@
+using Microsoft.EntityFrameworkCore;
+using Todo.Domain.Handlers;
+using Todo.Domain.Handlers.Contracts;
+using Todo.Domain.Repositories;
+using Todo.Infra.Context;
+using Todo.Infra.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Database"));
+
+builder.Services.AddScoped<INotification, NotificationContext>();
+
+builder.Services.AddTransient<TodoHandler, TodoHandler>();
+builder.Services.AddTransient<ITodoRepository, TodoRepository>();
+
+//builder.Services.AddScoped(,)
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -17,6 +33,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(x => x
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
