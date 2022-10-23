@@ -17,8 +17,6 @@ builder.Services.AddScoped<INotification, NotificationContext>();
 builder.Services.AddTransient<TodoHandler, TodoHandler>();
 builder.Services.AddTransient<ITodoRepository, TodoRepository>();
 
-//builder.Services.AddScoped(,)
-
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

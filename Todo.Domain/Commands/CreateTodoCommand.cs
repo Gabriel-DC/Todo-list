@@ -28,8 +28,8 @@ namespace Todo.Domain.Commands
                 RuleFor(r => r.Title)
                     .MinimumLength(3)
                     .WithMessage("O título deve conter pelo menos 3 caracteres")
-                    .MaximumLength(10)
-                    .WithMessage("O título não pode ultrapassar 10 caracteres");
+                    .MaximumLength(120)
+                    .WithMessage("O título não pode ultrapassar 120 caracteres");
 
                 RuleFor(r => r.User)
                     .NotEmpty()
