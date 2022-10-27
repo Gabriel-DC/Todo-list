@@ -21,16 +21,6 @@ builder.Services.AddScoped<INotification, NotificationContext>();
 builder.Services.AddTransient<TodoHandler, TodoHandler>();
 builder.Services.AddTransient<ITodoRepository, TodoRepository>();
 
-//const firebaseConfig = {
-//  apiKey: "AIzaSyA3pfsDVhjVXTAMRzd6_Qsv77uICRZaENw",
-//  authDomain: "todos-a044d.firebaseapp.com",
-//  projectId: "todos-a044d",
-//  storageBucket: "todos-a044d.appspot.com",
-//  messagingSenderId: "297860711028",
-//  appId: "1:297860711028:web:d3e4069d295767497c8721"
-//};
-
-
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(opts =>
     {
