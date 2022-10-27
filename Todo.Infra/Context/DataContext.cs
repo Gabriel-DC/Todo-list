@@ -11,11 +11,21 @@ namespace Todo.Infra.Context
 {
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
+
+        public DataContext(DbContextOptions options) : base(options)
         {
         }
 
         public DbSet<TodoItem> Todos { get; set; }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder options)
+        //{
+        //    base.OnConfiguring(options);
+        //    //if (!options.IsConfigured)
+        //    //{
+        //    //    //options.UseSqlServer("TESTE");
+        //    //}
+        //}
 
         protected override void OnModelCreating(ModelBuilder model)
         {
@@ -28,6 +38,7 @@ namespace Todo.Infra.Context
 
             model.Entity<TodoItem>().HasKey(x => x.Id);
             model.Entity<TodoItem>().HasIndex(x => x.User);
+            base.OnModelCreating(model);
         }
     }
 }

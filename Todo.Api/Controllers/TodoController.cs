@@ -77,7 +77,7 @@ namespace Todo.Api.Controllers
 
         [HttpPatch("mark-as-undone")]
         public GenericCommandResponse MarkAsUndone(
-            [FromBody] MarkTodoAsDoneCommand command,
+            [FromBody] MarkTodoAsUndoneCommand command,
             [FromServices] TodoHandler handler)
             => (GenericCommandResponse)handler.Handle(command);
     }
