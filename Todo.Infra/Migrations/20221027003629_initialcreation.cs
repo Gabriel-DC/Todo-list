@@ -17,7 +17,7 @@ namespace Todo.Infra.Migrations
                     Title = table.Column<string>(type: "varchar(160)", maxLength: 160, nullable: false),
                     Done = table.Column<bool>(type: "bit", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    User = table.Column<string>(type: "varchar(120)", maxLength: 120, nullable: false)
+                    User = table.Column<string>(type: "varchar(8000)", maxLength: 8000, nullable: false)
                 },
                 constraints: table =>
                 {

@@ -41,8 +41,8 @@ namespace Todo.Infra.Migrations
 
                     b.Property<string>("User")
                         .IsRequired()
-                        .HasMaxLength(120)
-                        .HasColumnType("varchar(120)");
+                        .HasMaxLength(8000)
+                        .HasColumnType("varchar(8000)");
 
                     b.HasKey("Id");
 

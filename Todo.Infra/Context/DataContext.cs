@@ -31,7 +31,7 @@ namespace Todo.Infra.Context
         {
             model.Entity<TodoItem>().ToTable("Todo");
             model.Entity<TodoItem>().Property(x => x.Id);
-            model.Entity<TodoItem>().Property(x => x.User).HasMaxLength(120).HasColumnType("varchar(120)");
+            model.Entity<TodoItem>().Property(x => x.User).HasMaxLength(8000).HasColumnType("varchar(8000)");
             model.Entity<TodoItem>().Property(x => x.Title).HasMaxLength(160).HasColumnType("varchar(120)");
             model.Entity<TodoItem>().Property(x => x.Date);
             model.Entity<TodoItem>().Property(x => x.Done).HasColumnType("bit");
