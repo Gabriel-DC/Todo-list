@@ -7,6 +7,7 @@ namespace Todo.Domain.Repositories
         void Create(TodoItem todo);
         void Update(TodoItem todo);
         TodoItem? GetTodoById(Guid todoId);
+        bool DeleteTodo(Guid todoId, string user);
 
         IEnumerable<TodoItem> GetAll(string user);
         IEnumerable<TodoItem> GetAllDone(string user);

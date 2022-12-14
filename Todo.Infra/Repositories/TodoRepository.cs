@@ -71,5 +71,19 @@ namespace Todo.Infra.Repositories
             _dataContext.Entry(todo).State = EntityState.Modified;
             _dataContext.SaveChanges();
         }
+
+        public bool DeleteTodo(Guid todoId, string user)
+        {
+            var todoItem = _dataContext.Todos.FirstOrDefault(t => t.Id == todoId && t.User == user);
+
+            if (todoItem is null)
+                return false;
+
+            _dataContext.Remove(todoItem);
+
+            _dataContext.SaveChanges();
+
+            return true;
+        }
     }
 }

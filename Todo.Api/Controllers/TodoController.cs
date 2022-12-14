@@ -13,6 +13,24 @@ namespace Todo.Api.Controllers
     [Authorize]
     public class TodoController : ControllerBase
     {
+        [HttpGet("today")]
+        public IEnumerable<TodoItem> GetTodayTodos(
+            [FromServices] ITodoRepository repository)
+        {
+            string user = User.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value!;
+
+            return repository.GetByDate(user, DateTime.Now, null);
+        }
+
+        [HttpGet("tomorrow")]
+        public IEnumerable<TodoItem> GetTomorrowTodos(
+            [FromServices] ITodoRepository repository)
+        {
+            string user = User.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value!;
+
+            return repository.GetByDate(user, DateTime.Now.AddDays(1), null);
+        }
+
         [HttpGet]
         public IEnumerable<TodoItem> GetAll(
             [FromServices] ITodoRepository repository)
@@ -94,6 +112,22 @@ namespace Todo.Api.Controllers
         {
             command.User = User.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value!;
             return (GenericCommandResponse)handler.Handle(command);
+        }
+
+        [HttpDelete("{id}")]
+        public GenericCommandResponse DeleteTodo(
+            Guid id,
+            [FromServices] ITodoRepository repository)
+        {
+            string user = User.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value!;
+
+            bool deleted = repository.DeleteTodo(id, user);
+
+            return new GenericCommandResponse(
+                deleted,
+                deleted ? "Deletado com sucesso!" : "Falha ao deletar item",
+                null
+            );
         }
     }
 }
