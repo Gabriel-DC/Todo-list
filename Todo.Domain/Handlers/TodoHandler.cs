@@ -65,6 +65,9 @@ namespace Todo.Domain.Handlers
 
             var todo = _repository.GetTodoById(command.TodoId);
 
+            if(todo is null)
+                return new GenericCommandResponse(false, "Item não encontrado", null);
+
             todo.MarkAsUndone();
 
             _repository.Update(todo);
