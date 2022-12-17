@@ -33,7 +33,7 @@ namespace Todo.Domain.Handlers
             if (_notificationContext.HasNotifications)
                 return new GenericCommandResponse(false, "Erros de validação", _notificationContext.Notifications);
 
-            var todo = new TodoItem(command.Title, command.Date, command.User);
+            var todo = new TodoItem(command.Title!, command.Date!.Value, command.User!);
 
             _repository.Create(todo);
 
@@ -47,9 +47,12 @@ namespace Todo.Domain.Handlers
             if (_notificationContext.HasNotifications)
                 return new GenericCommandResponse(false, "Erros de validação", _notificationContext.Notifications);
 
-            var todo = _repository.GetTodoById(command.TodoId);
+            var todo = _repository.GetTodoById(command.TodoId, command.User!);
 
-            todo.UpdateTitle(command.Title);
+            if (todo == null)
+                return new GenericCommandResponse(false, "Tarefa não encontrada", null);
+
+            todo.UpdateTitle(command.Title!);
 
             _repository.Update(todo);
 
@@ -63,9 +66,9 @@ namespace Todo.Domain.Handlers
             if (_notificationContext.HasNotifications)
                 return new GenericCommandResponse(false, "Erros de validação", _notificationContext.Notifications);
 
-            var todo = _repository.GetTodoById(command.TodoId);
+            var todo = _repository.GetTodoById(command.TodoId, command.User!);            
 
-            if(todo is null)
+            if (todo is null)
                 return new GenericCommandResponse(false, "Item não encontrado", null);
 
             todo.MarkAsUndone();
@@ -82,7 +85,10 @@ namespace Todo.Domain.Handlers
             if (_notificationContext.HasNotifications)
                 return new GenericCommandResponse(false, "Erros de validação", _notificationContext.Notifications);
 
-            var todo = _repository.GetTodoById(command.TodoId);
+            var todo = _repository.GetTodoById(command.TodoId, command.User!);
+
+            if (todo is null)
+                return new GenericCommandResponse(false, "Item não encontrado", null);
 
             todo.MarkAsDone();
 

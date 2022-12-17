@@ -6,18 +6,17 @@ namespace Todo.Domain.Commands
 {
     public class CreateTodoCommand : ICommand
     {
-        public CreateTodoCommand(string title, string user, DateTime date)
+        public CreateTodoCommand(string title, DateTime date)
         {
             Title = title;
-            User = user;
             Date = date;
         }
 
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
-        public string User { get; set; }
+        public string? User { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         public ValidationResult Validate() => new CreateTodoCommandValidator().Validate(this);
 

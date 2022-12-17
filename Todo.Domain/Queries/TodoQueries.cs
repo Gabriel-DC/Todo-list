@@ -40,9 +40,9 @@ namespace Todo.Domain.Queries
                 && x.Date.Date <= finalDate.Date;
         }
 
-        public static Expression<Func<TodoItem, bool>> GetById(Guid id)
+        public static Expression<Func<TodoItem, bool>> GetById(Guid id, string user)
         {
-            return x => x.Id == id;
+            return x => x.Id == id && x.User == user;
         }
     }
 }

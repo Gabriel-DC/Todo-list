@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Todo.Domain.Entities;
 using Todo.Domain.Queries;
 using Todo.Domain.Repositories;
@@ -61,9 +56,9 @@ namespace Todo.Infra.Repositories
                 .OrderBy(t => t.Date);
         }
 
-        public TodoItem? GetTodoById(Guid todoId)
+        public TodoItem? GetTodoById(Guid todoId, string user)
         {
-            return _dataContext.Todos.FirstOrDefault(TodoQueries.GetById(todoId));
+            return _dataContext.Todos.FirstOrDefault(TodoQueries.GetById(todoId, user));
         }
 
         public void Update(TodoItem todo)

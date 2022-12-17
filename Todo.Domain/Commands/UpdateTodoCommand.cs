@@ -10,17 +10,19 @@ namespace Todo.Domain.Commands
 {
     public class UpdateTodoCommand : ICommand
     {
-        public UpdateTodoCommand(string title, string user, DateTime date)
+        public UpdateTodoCommand(string title, DateTime date)
         {
             Title = title;
-            User = user;
+            Date = date;
         }
 
         public Guid TodoId { get; set; }
 
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
-        public string User { get; set; }
+        public string? User { get; set; }
+
+        public DateTime? Date { get; set; }
 
         public ValidationResult Validate() => new UpdateTodoCommandValidator().Validate(this);
 
@@ -41,6 +43,12 @@ namespace Todo.Domain.Commands
                 RuleFor(r => r.User)
                     .NotEmpty()
                     .WithMessage("Usuário inválido");
+
+                RuleFor(r => r.Date)
+                    .NotEmpty()
+                    .WithMessage("Data inválida")
+                    .GreaterThan(DateTime.Now.AddDays(-1))
+                    .WithMessage("Data inválida");
             }
         }
     }
