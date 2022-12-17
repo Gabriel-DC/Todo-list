@@ -6,14 +6,13 @@ namespace Todo.Domain.Commands
 {
     public class MarkTodoAsDoneCommand : ICommand
     {
-        public MarkTodoAsDoneCommand(Guid todoId, string user)
+        public MarkTodoAsDoneCommand(Guid todoId)
         {
             TodoId = todoId;
-            User = user;
         }
 
         public Guid TodoId { get; set; }
-        public string User { get; set; }
+        public string? User { get; set; }
 
         public ValidationResult Validate() => new MarkTodoAsDoneCommandValidator().Validate(this);
 
