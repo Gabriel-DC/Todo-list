@@ -6,6 +6,10 @@ namespace Todo.Domain.Commands
 {
     public class CreateTodoCommand : ICommand
     {
+        public CreateTodoCommand()
+        {                
+        }
+
         public CreateTodoCommand(string title, DateTime date)
         {
             Title = title;

@@ -53,6 +53,7 @@ namespace Todo.Domain.Handlers
                 return new GenericCommandResponse(false, "Tarefa não encontrada", null);
 
             todo.UpdateTitle(command.Title!);
+            todo.UpdateDate(command.Date!.Value);
 
             _repository.Update(todo);
 
