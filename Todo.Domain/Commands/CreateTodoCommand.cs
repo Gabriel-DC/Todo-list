@@ -6,18 +6,21 @@ namespace Todo.Domain.Commands
 {
     public class CreateTodoCommand : ICommand
     {
-        public CreateTodoCommand(string title, string user, DateTime date)
+        public CreateTodoCommand()
+        {                
+        }
+
+        public CreateTodoCommand(string title, DateTime date)
         {
             Title = title;
-            User = user;
             Date = date;
         }
 
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
-        public string User { get; set; }
+        public string? User { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         public ValidationResult Validate() => new CreateTodoCommandValidator().Validate(this);
 
@@ -28,8 +31,8 @@ namespace Todo.Domain.Commands
                 RuleFor(r => r.Title)
                     .MinimumLength(3)
                     .WithMessage("O título deve conter pelo menos 3 caracteres")
-                    .MaximumLength(10)
-                    .WithMessage("O título não pode ultrapassar 10 caracteres");
+                    .MaximumLength(120)
+                    .WithMessage("O título não pode ultrapassar 120 caracteres");
 
                 RuleFor(r => r.User)
                     .NotEmpty()

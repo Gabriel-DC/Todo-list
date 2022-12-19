@@ -10,17 +10,25 @@ namespace Todo.Domain.Commands
 {
     public class UpdateTodoCommand : ICommand
     {
-        public UpdateTodoCommand(string title, string user, DateTime date)
+        public UpdateTodoCommand()
         {
+
+        }
+
+        public UpdateTodoCommand(Guid todoId, string title, DateTime date)
+        {
+            TodoId = todoId;
             Title = title;
-            User = user;
+            Date = date;
         }
 
         public Guid TodoId { get; set; }
 
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
-        public string User { get; set; }
+        public string? User { get; set; }
+
+        public DateTime? Date { get; set; }
 
         public ValidationResult Validate() => new UpdateTodoCommandValidator().Validate(this);
 
@@ -35,12 +43,18 @@ namespace Todo.Domain.Commands
                 RuleFor(r => r.Title)
                     .MinimumLength(3)
                     .WithMessage("O título deve conter pelo menos 3 caracteres")
-                    .MaximumLength(10)
+                    .MaximumLength(120)
                     .WithMessage("O título não pode ultrapassar 10 caracteres");
 
                 RuleFor(r => r.User)
                     .NotEmpty()
                     .WithMessage("Usuário inválido");
+
+                RuleFor(r => r.Date)
+                    .NotEmpty()
+                    .WithMessage("Data inválida")
+                    .GreaterThan(DateTime.Now.AddDays(-1))
+                    .WithMessage("Data inválida");
             }
         }
     }

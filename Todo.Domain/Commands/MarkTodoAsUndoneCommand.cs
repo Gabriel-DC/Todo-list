@@ -10,15 +10,14 @@ namespace Todo.Domain.Commands
 {
     public class MarkTodoAsUndoneCommand : ICommand
     {
-        public MarkTodoAsUndoneCommand(Guid todoId, string user)
+        public MarkTodoAsUndoneCommand(Guid todoId)
         {
-            TodoId = todoId;
-            User = user;
+            TodoId = todoId;            
         }
 
         public Guid TodoId { get; set; }
 
-        public string User { get; set; }
+        public string? User { get; set; }
 
         public ValidationResult Validate() => new MarkTodoAsUndoneCommandValidator().Validate(this);
 
