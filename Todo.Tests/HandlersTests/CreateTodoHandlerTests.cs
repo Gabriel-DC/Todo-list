@@ -11,10 +11,16 @@ namespace Todo.Tests.HandlersTests
     public class CreateTodoHandlerTests
     {
         private readonly CreateTodoCommand _titlelessInvalidCommand =
-            new("", "Gabriel Almeida", DateTime.Now);
+            new("", DateTime.Now)
+            {
+                User = "user"
+            };
 
         private readonly CreateTodoCommand _validCommand =
-            new("Programar", "Gabriel Almeida", DateTime.Now);
+            new("Programar", DateTime.Now)
+            {
+                User = "user"
+            };
 
         private readonly TodoHandler _handler = new(new FakeTodoRepository(), new NotificationContext());
 

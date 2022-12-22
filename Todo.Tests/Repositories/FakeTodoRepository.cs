@@ -10,7 +10,7 @@ namespace Todo.Tests.Repositories
     {
         public void Create(TodoItem todo)
         {
-            throw new NotImplementedException();
+            //TA TUDO CERTO
         }
 
         public bool DeleteTodo(Guid todoId, string user)
