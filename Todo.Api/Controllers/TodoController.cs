@@ -66,7 +66,7 @@ namespace Todo.Api.Controllers
         }
 
         [HttpGet("period/{date}/{date2}")]
-        public IEnumerable<TodoItem> GetAllByDate(
+        public IEnumerable<TodoItem> GetAllByPeriod(
             DateTime date,
             DateTime date2,
             [FromQuery] bool? done,
