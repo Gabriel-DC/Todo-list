@@ -65,15 +65,15 @@ namespace Todo.Api.Controllers
             return repository.GetByDate(user,date.Date,done);
         }
 
-        [HttpGet("period/{date}/{date2}")]
+        [HttpGet("period/{startDate}/{endDate}")]
         public IEnumerable<TodoItem> GetAllByPeriod(
-            DateTime date,
-            DateTime date2,
+            DateTime startDate,
+            DateTime endDate,
             [FromQuery] bool? done,
             [FromServices] ITodoRepository repository)
         {
             string user = User.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value!;
-            return repository.GetByPeriod(user, date.Date, date2.Date, done);
+            return repository.GetByPeriod(user, startDate.Date, endDate.Date, done);
         }
 
         [HttpPost]
