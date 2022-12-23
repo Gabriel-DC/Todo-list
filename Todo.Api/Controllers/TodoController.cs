@@ -94,7 +94,6 @@ namespace Todo.Api.Controllers
             return (GenericCommandResponse)handler.Handle(command);
         } 
 
-
         [HttpPatch("mark-as-done")]
         public GenericCommandResponse MarkAsDone(
             [FromBody] MarkTodoAsDoneCommand command,
@@ -103,7 +102,6 @@ namespace Todo.Api.Controllers
             command.User = User.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value!;
             return (GenericCommandResponse)handler.Handle(command);
         }
-
 
         [HttpPatch("mark-as-undone")]
         public GenericCommandResponse MarkAsUndone(
