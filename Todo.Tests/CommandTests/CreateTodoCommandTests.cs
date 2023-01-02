@@ -10,10 +10,16 @@ namespace Todo.Tests.CommandTests
     public class CreateTodoCommandTests
     {
         private readonly CreateTodoCommand _titlelessInvalidCommand =
-            new CreateTodoCommand("", "Gabriel Almeida", DateTime.Now);
+            new("", DateTime.Now)
+            {
+                User = "user"
+            };
 
         private readonly CreateTodoCommand _validCommand =
-            new CreateTodoCommand("Programar", "Gabriel Almeida", DateTime.Now);
+            new("Programar", DateTime.Now)
+            {
+                User = "user"
+            };
 
         [TestMethod]
         [TestCategory("Commands")]
