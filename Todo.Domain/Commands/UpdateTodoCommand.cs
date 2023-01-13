@@ -52,8 +52,6 @@ namespace Todo.Domain.Commands
 
                 RuleFor(r => r.Date)
                     .NotEmpty()
-                    .WithMessage("Data inválida")
-                    .GreaterThan(DateTime.Now.AddDays(-1))
                     .WithMessage("Data inválida");
             }
         }
