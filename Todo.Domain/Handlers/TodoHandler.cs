@@ -18,9 +18,9 @@ namespace Todo.Domain.Handlers
     IHandler<MarkTodoAsUndoneCommand, ICommandResponse>
     {
         private readonly ITodoRepository _repository;
-        private readonly INotification _notificationContext;
+        private readonly INotificationContext _notificationContext;
 
-        public TodoHandler(ITodoRepository repository, INotification notificationContext)
+        public TodoHandler(ITodoRepository repository, INotificationContext notificationContext)
         {
             _repository = repository;
             _notificationContext = notificationContext;

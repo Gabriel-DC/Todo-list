@@ -16,7 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<DataContext>(opt =>
 opt.UseSqlServer(builder.Configuration.GetConnectionString("dev-homologacao")));
 
-builder.Services.AddScoped<INotification, NotificationContext>();
+builder.Services.AddScoped<INotificationContext, NotificationContext>();
 
 builder.Services.AddTransient<TodoHandler, TodoHandler>();
 builder.Services.AddTransient<ITodoRepository, TodoRepository>();

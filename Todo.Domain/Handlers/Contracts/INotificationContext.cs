@@ -7,7 +7,7 @@ using FluentValidation.Results;
 
 namespace Todo.Domain.Handlers.Contracts
 {
-    public interface INotification
+    public interface INotificationContext
     {
         public ReadOnlyCollection<Notification> Notifications { get; }
         void AddNotification(string propertyName, string message);

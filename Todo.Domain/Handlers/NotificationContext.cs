@@ -8,7 +8,7 @@ using Todo.Domain.Handlers.Contracts;
 
 namespace Todo.Domain.Handlers
 {
-    public class NotificationContext : INotification
+    public class NotificationContext : INotificationContext
     {
         public NotificationContext()
         {
