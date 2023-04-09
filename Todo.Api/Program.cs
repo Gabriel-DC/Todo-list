@@ -12,9 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-//builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Database"));
-builder.Services.AddDbContext<DataContext>(opt =>
-opt.UseSqlServer(builder.Configuration.GetConnectionString("dev-homologacao")));
+builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Database"));
+//builder.Services.AddDbContext<DataContext>(opt =>
+//opt.UseSqlServer(builder.Configuration.GetConnectionString("dev-homologacao")));
 
 builder.Services.AddScoped<INotificationContext, NotificationContext>();
 
