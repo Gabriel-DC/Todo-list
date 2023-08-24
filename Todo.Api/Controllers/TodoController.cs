@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Todo.Domain.Commands;
-using Todo.Domain.Commands.Contracts;
 using Todo.Domain.Entities;
 using Todo.Domain.Handlers;
 using Todo.Domain.Repositories;
@@ -36,7 +35,7 @@ namespace Todo.Api.Controllers
             [FromServices] ITodoRepository repository)
         {
             string user = User.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value!;
-            return repository.GetAll(user!);
+            return repository.GetAll(user);
         }
 
         [HttpGet("done")]

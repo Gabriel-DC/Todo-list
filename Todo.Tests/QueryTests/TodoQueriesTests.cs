@@ -1,16 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-
-namespace Todo.Tests.QueryTests
+﻿namespace Todo.Tests.QueryTests
 {
     [TestClass]
     public class TodoQueriesTests
     {
-        private List<TodoItem> TodoItems;
+        private readonly List<TodoItem> _todoItems;
 
         public TodoQueriesTests()
         {
-            TodoItems = new List<TodoItem>()
+            _todoItems = new List<TodoItem>()
             {
                 new TodoItem("Estudar", DateTime.Now, "Gabriel"),
                 new TodoItem("Jogar", DateTime.Now, "Eduardo"),
@@ -24,7 +21,7 @@ namespace Todo.Tests.QueryTests
         [TestCategory("Queries")]
         public void Dado_a_consulta_deve_retornar_todas_as_tarefas_de_um_usuario_especifico()
         {
-            var result = TodoItems.AsQueryable().Where(TodoQueries.GetAll("Gabriel")).ToList();
+            var result = _todoItems.AsQueryable().Where(TodoQueries.GetAll("Gabriel")).ToList();
             Assert.AreEqual(2, result.Count);
         }
     }
