@@ -12,9 +12,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Database"));
-//builder.Services.AddDbContext<DataContext>(opt =>
-//opt.UseSqlServer(builder.Configuration.GetConnectionString("dev-homologacao")));
+string? dbConnString = builder.Configuration.GetConnectionString("dev-homologacao-mysql");
+
+builder.Services.AddDbContext<DataContext>(opt =>
+    opt.UseMySql(dbConnString, ServerVersion.AutoDetect(dbConnString)));
 
 builder.Services.AddScoped<INotificationContext, NotificationContext>();
 

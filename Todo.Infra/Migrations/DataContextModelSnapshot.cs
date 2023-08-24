@@ -26,10 +26,10 @@ namespace Todo.Infra.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<bool>("Done")
                         .HasColumnType("bit");
@@ -41,8 +41,8 @@ namespace Todo.Infra.Migrations
 
                     b.Property<string>("User")
                         .IsRequired()
-                        .HasMaxLength(8000)
-                        .HasColumnType("varchar(8000)");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 

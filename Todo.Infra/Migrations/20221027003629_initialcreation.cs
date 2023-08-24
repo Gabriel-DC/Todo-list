@@ -13,11 +13,11 @@ namespace Todo.Infra.Migrations
                 name: "Todo",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     Title = table.Column<string>(type: "varchar(160)", maxLength: 160, nullable: false),
                     Done = table.Column<bool>(type: "bit", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    User = table.Column<string>(type: "varchar(8000)", maxLength: 8000, nullable: false)
+                    Date = table.Column<DateTime>(type: "datetime", nullable: false),
+                    User = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
